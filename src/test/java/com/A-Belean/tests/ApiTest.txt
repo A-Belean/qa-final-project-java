@@ -1,0 +1,43 @@
+CLASA TestareAPI
+
+// Variabila globala care retine adresa de baza a serviciului testat.
+VARIABILA bazaURL DE TIP Text
+
+// Procedura de initializare care se executa o singura data inaintea testelor.
+// Se ocupa de incarcarea datelor de configurare din fisierul YAML.
+PROCEDURA initializeaza_configurarea()
+INCEARCA
+configurare = CitesteFisierYAML("app.yaml")
+CATCH EroareLaCitire
+ARUNCA EROARE "Fisierul app.yaml nu a fost gasit sau nu poate fi citit!"
+SFARSIT INCEARCA
+
+```
+bazaURL = configurare["service"]["baseUrl"]
+AfiseazaLaConsola("URL de baza incarcat: " + bazaURL)
+```
+
+SFARSIT PROCEDURA
+
+// Test pentru verificarea raspunsului API la o cerere GET.
+// Se asigura ca endpoint-ul /todos/1 returneaza status 200 si contine un camp 'title'.
+TEST verifica_endpoint_todos_1()
+
+```
+// === ARRANGE ===
+endpoint = CombinaText(bazaURL, "/todos/1")
+AfiseazaLaConsola("Pornesc testul pentru: " + endpoint)
+
+// === ACT ===
+raspuns = TrimiteCerereGET(endpoint)
+
+// === ASSERT ===
+Verifica(raspuns.statusCode ESTE EGAL CU 200)
+Verifica(raspuns.contineCheia("title") ESTE ADEVARAT)
+
+AfiseazaLaConsola("Test trecut: Raspuns valid, cod 200 si camp 'title' prezent.")
+```
+
+SFARSIT TEST
+
+SFARSIT CLASA
