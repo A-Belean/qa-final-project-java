@@ -1,5 +1,4 @@
-# QA Final Project - Java
-![CI Pipeline Status](https://github.com/<username>/qa-final-project-java/actions/workflows/ci.yml/badge.svg)
+[![CI Pipeline for QA Project](https://github.com/A-Belean/qa-final-project-java/actions/workflows/ci.yml/badge.svg)](https://github.com/A-Belean/qa-final-project-java/actions/workflows/ci.yml)
 
 ## 📘 Descriere
 Acest proiect simulează un pipeline complet de QA pentru un proiect Java/Maven.
